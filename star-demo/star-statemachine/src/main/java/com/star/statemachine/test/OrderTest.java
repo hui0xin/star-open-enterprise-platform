@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
+import org.springframework.statemachine.persist.StateMachinePersister;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
@@ -22,6 +23,9 @@ public class OrderTest {
      */
     @Autowired
     private StateMachine<States, Events> stateMachine;
+
+    @Autowired
+    private StateMachinePersister<States, Events, String> stateMachineMemPersister;
 
     /**
      * 运行结果如下。要注意的是，上面代码我们连续发送两个 PAY 支付事件，
@@ -132,7 +136,7 @@ public class OrderTest {
         System.out.println("> 事件是否发送成功：" + result + "，当前状态：" + stateMachine.getState().getId());
     }
 
-    @Test
+    //@Test
     public void testOrder5() {
 
         System.out.println("--- 开始创建订单流程 ---");
@@ -160,5 +164,65 @@ public class OrderTest {
         result = stateMachine.sendEvent(message);
         System.out.println("> 事件是否发送成功：" + result + "，当前状态：" + stateMachine.getState().getId());
     }
+
+    @Test
+    public void testOrder6() {
+        // 创建第1个订单对象
+        Order order1 = new Order();
+        order1.setStates(States.UNPAID);
+        order1.setId(1);
+
+        System.out.println("--- 发送第1个订单支付事件 ---");
+        boolean result = this.sendEvent(Events.PAY, order1);
+        System.out.println("> 事件是否发送成功：" + result + "，订单编号：" + order1.getId() + "，当前状态：" + stateMachine.getState().getId());
+
+        // 在子线程中等待6秒后再发送收货事件
+        new Thread(() -> {
+            try {
+                Thread.sleep(6000);
+                System.out.println("--- 发送第1个订单收货事件 ---");
+                boolean result2 = this.sendEvent(Events.RECEIVE, order1);
+                System.out.println("> 事件是否发送成功：" + result2 + "，订单编号：" + order1.getId() + "，当前状态：" + stateMachine.getState().getId());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        // 创建第2个订单对象
+        Order order2 = new Order();
+        order2.setStates(States.UNPAID);
+        order2.setId(2);
+        System.out.println("--- 发送第2个订单支付事件 ---");
+        result = this.sendEvent(Events.PAY, order2);
+        System.out.println("> 事件是否发送成功：" + result + "，订单编号：" + order2.getId() + "，当前状态：" + stateMachine.getState().getId());
+        System.out.println("--- 发送第2个订单收货事件 ---");
+        result = this.sendEvent(Events.RECEIVE, order2);
+        System.out.println("> 事件是否发送成功：" + result + "，订单编号：" + order2.getId() + "，当前状态：" + stateMachine.getState().getId());
+
+    }
+
+    /**
+     * 发送订单状态转换事件
+     * synchronized修饰保证这个方法是线程安全的
+     */
+    private synchronized boolean sendEvent (Events changeEvent, Order order){
+        boolean result = false;
+        try {
+            //启动状态机
+            stateMachine.start();
+            //尝试恢复状态机状态
+            stateMachineMemPersister.restore(stateMachine, String.valueOf(order.getId()));
+            Message message = MessageBuilder.withPayload(changeEvent).setHeader("order", order).build();
+            result = stateMachine.sendEvent(message);
+            //持久化状态机状态
+            stateMachineMemPersister.persist(stateMachine, String.valueOf(order.getId()));
+        } catch (Exception e) {
+            System.out.println("操作失败：" + e.getMessage());
+        } finally {
+            stateMachine.stop();
+        }
+        return result;
+    }
+
 
 }

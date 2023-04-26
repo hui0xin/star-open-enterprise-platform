@@ -3,7 +3,6 @@ package com.star.statemachine.config;
 import com.star.statemachine.common.Events;
 import com.star.statemachine.common.States;
 import com.star.statemachine.core.ErrorHandlerAction;
-import com.star.statemachine.core.OrderCheckFailedAction;
 import com.star.statemachine.core.OrderCheckGuard;
 import com.star.statemachine.core.OrderCheckPassedAction;
 import com.star.statemachine.core.OrderPayAction;
