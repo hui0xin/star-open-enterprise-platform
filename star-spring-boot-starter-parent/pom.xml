@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--parent-->
+    <parent>
+        <groupId>com.star.commons</groupId>
+        <artifactId>star-spring-boot-dependencies</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.star.commons</groupId>
+    <artifactId>star-spring-boot-starter-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+
+    <description>star所有spring-boot项目的parent pom.xml所有的spring-boot应用都继承该pom.xml</description>
+
+    <!--个人博客地址-->
+    <url>https://www.jianshu.com/u/6ad247189165</url>
+
+    <!--版本管理-->
+    <properties>
+        <star-commons-support.version>1.0-SNAPSHOT</star-commons-support.version>
+        <star-commons-support-web.version>1.0-SNAPSHOT</star-commons-support-web.version>
+    </properties>
+
+    <!--构建maven需要的最低版本-->
+    <prerequisites>
+        <maven>3.2.1</maven>
+    </prerequisites>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.star.commons</groupId>
+                <artifactId>star-commons-support</artifactId>
+                <version>${star-commons-support.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.star.commons</groupId>
+                <artifactId>star-commons-support-web</artifactId>
+                <version>${star-commons-support-web.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--构建项目-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${java.encoding}</encoding>
+                </configuration>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+            <!--源代码插件，打包时会将源码打出来-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-source</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

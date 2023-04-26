@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.star.commons</groupId>
+    <artifactId>star-open-enterprise-platform</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+
+    <description>开发的企业级应用平台</description>
+    <!--个人博客地址-->
+    <url>https://www.jianshu.com/u/6ad247189165</url>
+
+    <modules>
+        <module>star-demo</module>
+        <module>star-support</module>
+        <module>star-generator-center</module>
+        <module>star-spring-boot-dependencies</module>
+        <module>star-spring-boot-starter-parent</module>
+    </modules>
+
+</project>
