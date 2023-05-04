@@ -1,11 +1,11 @@
-package com.star.statemachine.config;
+package com.star.statemachine.core;
 
 import com.star.statemachine.common.Events;
 import com.star.statemachine.common.States;
-import com.star.statemachine.core.ErrorHandlerAction;
-import com.star.statemachine.core.OrderCheckGuard;
-import com.star.statemachine.core.OrderCheckPassedAction;
-import com.star.statemachine.core.OrderPayAction;
+import com.star.statemachine.action.ErrorHandlerAction;
+import com.star.statemachine.cuard.OrderCheckGuard;
+import com.star.statemachine.action.OrderCheckPassedAction;
+import com.star.statemachine.action.OrderPayAction;
 import java.util.EnumSet;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
@@ -59,8 +59,9 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {
         transitions
             .withExternal()
+            // 支付事件将触发：待支付状态->待收货状态
             .source(States.UNPAID).target(States.WAITING_FOR_RECEIVE)
-            //支付事件将触发：待支付状态->待收货状态
+            // 处理事件
             .event(Events.PAY)
             // 状态转换guard
             .guard(new OrderCheckGuard())

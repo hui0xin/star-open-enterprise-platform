@@ -18,7 +18,7 @@ public class GenerateStartUp {
     //生成项目地址
     public final static String filePath = "/Users/star/localRepository/git/study/star-open-enterprise-platform/star-demo";
     //项目名称
-    public final static String projectName = "star-statemachine";
+    public final static String projectName = "star-disruptor";
     //项目说明
     public final static String projectDesc = "状态机demo";
 

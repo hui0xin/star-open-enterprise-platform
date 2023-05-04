@@ -1,4 +1,4 @@
-package com.star.statemachine.config;
+package com.star.statemachine.core;
 
 import com.star.statemachine.bean.Order;
 import com.star.statemachine.common.Events;
@@ -22,6 +22,7 @@ public class StateMachineEventConfig {
 
     @OnTransition(target = "UNPAID")
     public void create() {
+
         System.out.println("订单创建");
     }
 
@@ -31,26 +32,26 @@ public class StateMachineEventConfig {
 //    }
 
     @OnTransition(source = "UNPAID", target = "WAITING_FOR_CHECK")
-    public void pay(Message<Events> message) {
+    public void payCheck(Message<Events> message) {
         // 获取消息中的订单对象
         Order order = (Order) message.getHeaders().get("order");
         // 设置新状态
         order.setStates(States.WAITING_FOR_RECEIVE);
         System.out.println("用户支付完毕，状态机反馈信息：" + message.getHeaders().toString());
     }
-//
-//    /**
-//     * 接收消息
-//     * @param message
-//     */
-//    @OnTransition(source = "UNPAID", target = "WAITING_FOR_RECEIVE")
-//    public void pay(Message<Events> message) {
-//        // 获取消息中的订单对象
-//        Order order = (Order) message.getHeaders().get("order");
-//        // 设置新状态
-//        order.setStates(States.WAITING_FOR_RECEIVE);
-//        System.out.println("用户支付完毕，状态机反馈信息：" + message.getHeaders());
-//    }
+
+    /**
+     * 接收消息
+     * @param message
+     */
+    @OnTransition(source = "UNPAID", target = "WAITING_FOR_RECEIVE")
+    public void pay(Message<Events> message) {
+        // 获取消息中的订单对象
+        Order order = (Order) message.getHeaders().get("order");
+        // 设置新状态
+        order.setStates(States.WAITING_FOR_RECEIVE);
+        System.out.println("用户支付完毕，状态机反馈信息：" + message.getHeaders());
+    }
 
     @OnTransitionStart(source = "UNPAID", target = "WAITING_FOR_RECEIVE")
     public void payStart() {

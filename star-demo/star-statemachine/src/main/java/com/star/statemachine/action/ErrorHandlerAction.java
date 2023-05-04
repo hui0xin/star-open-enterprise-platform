@@ -1,4 +1,4 @@
-package com.star.statemachine.core;
+package com.star.statemachine.action;
 
 import com.star.statemachine.common.Events;
 import com.star.statemachine.common.States;
