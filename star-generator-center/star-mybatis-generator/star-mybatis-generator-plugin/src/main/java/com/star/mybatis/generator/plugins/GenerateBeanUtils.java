@@ -28,8 +28,7 @@ public class GenerateBeanUtils {
      */
     public static void generateControllerFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, Properties properties)
         throws IOException, TemplateException {
-        String basePackage = properties.getProperty("common");
-        String packageController = properties.getProperty("controller").replace("${common}",basePackage);
+        String packageController = properties.getProperty("controller");
         if (packageController != null) {
             String packageService = properties.getProperty("service");
             String packageDomain = topLevelClass.getType().getPackageName();
@@ -67,8 +66,7 @@ public class GenerateBeanUtils {
      */
     public static void generateServiceFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, Properties properties)
         throws IOException, TemplateException {
-        String basePackage = properties.getProperty("common");
-        String packageService = properties.getProperty("service").replace("${common}",basePackage);
+        String packageService = properties.getProperty("service");
         if (packageService != null) {
             String packageDomain = topLevelClass.getType().getPackageName();
             String[] mulu = properties.getProperty("service").split("\\.");
@@ -104,8 +102,7 @@ public class GenerateBeanUtils {
      */
     public static void generateImplFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, Properties properties)
         throws IOException, TemplateException {
-        String basePackage = properties.getProperty("common");
-        String packageImpl = properties.getProperty("impl").replace("${common}",basePackage);
+        String packageImpl = properties.getProperty("impl");
         if (packageImpl != null) {
             String packageService = properties.getProperty("service");
             String packageDomain = topLevelClass.getType().getPackageName();
@@ -142,8 +139,7 @@ public class GenerateBeanUtils {
      */
     public static void generateVoFile(TopLevelClass topLevelClass, IntrospectedTable introspectedTable, Properties properties)
         throws IOException, TemplateException {
-        String basePackage = properties.getProperty("common");
-        String packageVo = properties.getProperty("vo").replace("${common}",basePackage);
+        String packageVo = properties.getProperty("vo");
         if (packageVo != null) {
             String packageDomain = topLevelClass.getType().getPackageName();
             String fileDoName = topLevelClass.getType().getShortName();

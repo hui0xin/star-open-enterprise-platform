@@ -77,10 +77,10 @@
 
         <!--<plugin>元素用来定义一个插件。插件用于扩展或修改通过MyBatis Generator (MBG)代码生成器生成的代码。 -->
         <plugin type="com.star.mybatis.generator.plugins.BasePlugin">
-            <property name="vo" value="${vo}"/>
-            <property name="controller" value="${controller}"/>
-            <property name="service" value="${service}"/>
-            <property name="impl" value="${serviceImpl}"/>
+            <property name="vo" value="${base}.${vo}"/>
+            <property name="controller" value="${base}.${controller}"/>
+            <property name="service" value="${base}.${service}"/>
+            <property name="impl" value="${base}.${serviceImpl}"/>
             <property name="usekeys" value="${usekeys}"/>
         </plugin>
 
@@ -127,7 +127,7 @@
             targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
             targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
          -->
-        <javaModelGenerator targetPackage="${DO}" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="${base}.${DO}" targetProject="src/main/java">
             <!-- for MyBatis3/MyBatis3Simple 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter； -->
             <property name="constructorBased" value="false"/>
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
@@ -164,7 +164,7 @@
             3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
         注意，如果context是MyBatis3Simple：只支持 ANNOTATEDMAPPER 和 XMLMAPPER
         -->
-        <javaClientGenerator targetPackage="${mapper}" type="${mapper_mode}" targetProject="src/main/java">
+        <javaClientGenerator targetPackage="${base}.${mapper}" type="${mapper_mode}" targetProject="src/main/java">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true"/>
 
