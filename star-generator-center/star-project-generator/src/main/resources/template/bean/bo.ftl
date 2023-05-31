@@ -8,6 +8,10 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @Description: Bo 前端的请求参数
+ * @author: 系统
+ */
 @Data
 @ApiModel(value = "DemoBo", description = "说明")
 public class DemoBo implements Serializable {

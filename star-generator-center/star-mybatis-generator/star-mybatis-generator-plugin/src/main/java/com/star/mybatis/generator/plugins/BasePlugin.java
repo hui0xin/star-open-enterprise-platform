@@ -124,7 +124,7 @@ public class BasePlugin extends PluginAdapter {
     public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn,
                                        IntrospectedTable introspectedTable, ModelClassType modelClassType) {
         // 生成注释
-        Annotation.fieldAnnotation(field, introspectedColumn.getRemarks());
+        // Annotation.fieldAnnotation(field, introspectedColumn.getRemarks());
         // 生成注释结束
         // 追加ApiModelProperty注解
         topLevelClass.addImportedType(new FullyQualifiedJavaType(ImportAnnotation.ApiModelProperty.getClazz()));

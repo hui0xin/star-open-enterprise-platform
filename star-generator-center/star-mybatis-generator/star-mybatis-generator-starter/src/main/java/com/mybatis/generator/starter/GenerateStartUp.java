@@ -24,7 +24,7 @@ public class GenerateStartUp {
         try {
             boolean overwrite = true;
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-            InputStream is = classloader.getResourceAsStream("generatorConfig.xml");
+            InputStream is = classloader.getResourceAsStream("mybatis-generator.xml");
             ConfigurationParser cp = new ConfigurationParser(warnings);
             Configuration config = cp.parseConfiguration(is);
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);

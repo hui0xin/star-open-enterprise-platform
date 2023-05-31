@@ -8,8 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Description: Do 和数据库的字段一一对应
- *               可以通过  star-mybatis-generator 工程生成
+ * @Description: Do 和数据库的字段一一对应，可以通过  star-mybatis-generator 工程生成
  * @author: 系统
  */
 @Data

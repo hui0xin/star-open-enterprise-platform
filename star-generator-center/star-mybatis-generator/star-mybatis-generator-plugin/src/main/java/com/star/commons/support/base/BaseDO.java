@@ -20,9 +20,6 @@ import java.util.Date;
 @ApiModel(value = "公共实体", description = "公共实体")
 public class BaseDO implements Serializable {
 
-    /**
-     * required=true 表示是否是必填参数
-     */
     @ApiModelProperty(value = "id", required = true)
     private Long id;
 

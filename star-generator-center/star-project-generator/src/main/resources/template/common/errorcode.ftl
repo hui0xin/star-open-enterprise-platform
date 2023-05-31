@@ -3,7 +3,7 @@ package com.${packageName}.common.errorcode;
 import com.star.commons.support.code.ErrorCode;
 
 /**
- * @Description: 业务错误码，错误信息在messages中配置
+ * @Description: 业务错误码
  * @author: 系统
  */
 public enum ${className}ErrorCode implements ErrorCode {
@@ -15,7 +15,7 @@ public enum ${className}ErrorCode implements ErrorCode {
     private final int code;
     private final String name;
 
-    StatemachineErrorCode(final int code, final String name) {
+    ${className}ErrorCode(final int code, final String name) {
         this.code = code;
         this.name = name;
     }

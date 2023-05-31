@@ -18,9 +18,9 @@ public class GenerateStartUp {
     //生成项目地址
     public final static String filePath = "/Users/star/localRepository/git/study/star-open-enterprise-platform/star-demo";
     //项目名称
-    public final static String projectName = "star-disruptor";
+    public final static String projectName = "star-activity";
     //项目说明
-    public final static String projectDesc = "状态机demo";
+    public final static String projectDesc = "抹茶活动";
 
     /**
      * 是否是docker项目，
@@ -34,7 +34,7 @@ public class GenerateStartUp {
      * standard-->标准项目，
      * simple--->简单项目,
      */
-    public final static String projectType = "simple";
+    public final static String projectType = "standard";
 
     /**
      * 项目配置文件结构:
@@ -48,7 +48,7 @@ public class GenerateStartUp {
      * true-->分
      * false-->不分
      */
-    public final static Boolean isMultiEnv = false;
+    public final static Boolean isMultiEnv = true;
 
     public static void main(String[] args) {
 

@@ -23,17 +23,13 @@ import java.util.List;
 @FeignClient(value = "${serverId}",path = "/demo")
 public interface ${className}Client {
 
-    @ApiOperation(value = "新增数据", notes = "新增数据 api")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "demoDo", value = "新增对象实体",  required = true, dataType = "DemoDo", paramType = "body")
-    })
+    @ApiOperation(value = "add", notes = "新增数据 api")
+    @ApiImplicitParam(name = "demoDo", value = "新增对象实体",  required = true, paramType = "body", dataTypeClass = DemoDo.class)
     @PostMapping("/v1/add")
     ResponseResult add(@RequestBody DemoDo demoDo);
 
-    @ApiOperation(value = "修改数据", notes = "修改数据 api")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "demoDo", value = "修改对象实体", required = true, dataType = "DemoDo", paramType = "body")
-    })
+    @ApiOperation(value = "update", notes = "修改数据 api")
+    @ApiImplicitParam(name = "demoDo", value = "修改对象实体", required = true, paramType = "body", dataTypeClass = DemoDo.class)
     @PostMapping(value = "/v1/update")
     ResponseResult update(@RequestBody DemoDo demoDo);
 
@@ -42,23 +38,21 @@ public interface ${className}Client {
     @DeleteMapping("/v1/delete/{id}")
     ResponseResult delete(@PathVariable("id") Long id);
 
-    @ApiOperation(value="通过id查询详情信息", notes="通过id查询详情信息 api")
-    @ApiImplicitParam(name = "id",  value = "查询实体的id", required = true, dataType = "Long", paramType="path")
+    @ApiOperation(value="get", notes="通过id查询详情信息 api")
+    @ApiImplicitParam(name = "id",  value = "查询实体的id", required = true, paramType="path", dataTypeClass = Long.class)
     @GetMapping("/v1/get/{id}")
     ResponseResult<DemoDo> get(@PathVariable("id") Long id);
 
-    @ApiOperation(value = "通过条件查询列表", notes = "通过条件查询列表 api")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "demoBo", value = "修改对象实体", required = true, dataType = "DemoBo", paramType = "body")
-    })
+    @ApiOperation(value = "list", notes = "通过条件查询列表 api")
+    @ApiImplicitParam(name = "demoBo", value = "修改对象实体", required = true, paramType = "body", dataTypeClass = DemoBo.class)
     @GetMapping(value = "/v1/list")
     ResponseResult<List<DemoDo>> list(@RequestBody DemoBo demoBo);
 
     @ApiOperation(value = "通过条件查询分页数据", notes = "通过条件查询分页数据 api")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "demoBo", value = "查询条件实体", required = true, dataType = "DemoBo", paramType = "body"),
-        @ApiImplicitParam(name = "pageIndex", value = "第几页", required = true, dataType = "Integer", paramType = "query"),
-        @ApiImplicitParam(name = "pageSize", value = "每页多少条", required = true, dataType = "Integer", paramType = "query")
+        @ApiImplicitParam(name = "demoBo", value = "查询条件实体", required = true, paramType = "body", dataTypeClass = DemoBo.class),
+        @ApiImplicitParam(name = "pageIndex", value = "第几页", required = true, paramType = "query", dataTypeClass = Integer.class),
+        @ApiImplicitParam(name = "pageSize", value = "每页多少条", required = true, paramType = "query", dataTypeClass = Integer.class)
     })
     @GetMapping(value = "/v1/listByPage")
     ResponseResult<PageInfo<DemoDo>> listByPage(@RequestBody DemoBo demoBo,
