@@ -22,6 +22,7 @@ public class GenerateStartUp {
     public static void main(String[] args) {
         List<String> warnings = new ArrayList<String>();
         try {
+            //生成代码重复时，是否覆盖源代码
             boolean overwrite = true;
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             InputStream is = classloader.getResourceAsStream("mybatis-generator.xml");
@@ -41,6 +42,7 @@ public class GenerateStartUp {
         } catch (XMLParserException e) {
             e.printStackTrace();
         }
+        //输出警告信息
         for (String warning : warnings) {
             System.out.println(warning);
         }
