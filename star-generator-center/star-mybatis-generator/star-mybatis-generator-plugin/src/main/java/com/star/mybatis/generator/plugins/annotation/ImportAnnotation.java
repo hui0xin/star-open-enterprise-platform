@@ -6,6 +6,7 @@ package com.star.mybatis.generator.plugins.annotation;
  */
 public enum ImportAnnotation {
 
+    //
     DATA("@Data", "lombok.Data"),
     Mapper("@Mapper", "org.apache.ibatis.annotations.Mapper"),
     Param("@Param", "org.apache.ibatis.annotations.Param"),

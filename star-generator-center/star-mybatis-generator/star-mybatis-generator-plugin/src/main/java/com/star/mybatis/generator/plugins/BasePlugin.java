@@ -149,6 +149,7 @@ public class BasePlugin extends PluginAdapter {
      * Insert方法 插入数据
      * @return
      */
+    @Override
     public boolean clientInsertMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         Annotation.methodAnnotation(method, "插入数据");
         //打完收工
@@ -160,6 +161,7 @@ public class BasePlugin extends PluginAdapter {
      * InsertSelective方法
      * @return false 禁止生成该方法
      */
+    @Override
     public boolean clientInsertSelectiveMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         return false;
     }
@@ -169,6 +171,7 @@ public class BasePlugin extends PluginAdapter {
      * InsertSelective方法
      * @return false 禁止生成该方法
      */
+    @Override
     public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
         return false;
     }
@@ -232,6 +235,7 @@ public class BasePlugin extends PluginAdapter {
      * deleteByPrimaryKey方法 根据主键删除数据
      * @return
      */
+    @Override
     public boolean clientDeleteByPrimaryKeyMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         Annotation.methodAnnotation(method, "根据主键删除数据");
         return super.clientDeleteByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable);
@@ -242,6 +246,7 @@ public class BasePlugin extends PluginAdapter {
      * UpdateByPrimaryKeySelective方法
      * @return
      */
+    @Override
     public boolean clientUpdateByPrimaryKeySelectiveMethodGenerated(Method method, Interface interfaze,
                                                                     IntrospectedTable introspectedTable) {
         Annotation.methodAnnotation(method, "修改数据");
@@ -264,6 +269,7 @@ public class BasePlugin extends PluginAdapter {
      * UpdateByPrimaryKey方法
      * @return false 禁止生成
      */
+    @Override
     public boolean sqlMapUpdateByPrimaryKeyWithoutBLOBsElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
         return false;
     }
@@ -273,6 +279,7 @@ public class BasePlugin extends PluginAdapter {
      * selectByPrimaryKey方法 根据主键id查询
      * @return
      */
+    @Override
     public boolean clientSelectByPrimaryKeyMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         if (("selectByPrimaryKey").equals(method.getName())) {
             Annotation.methodAnnotation(method, "根据主键id查询");
@@ -288,6 +295,7 @@ public class BasePlugin extends PluginAdapter {
      * 为mapper添加新方法
      * @return
      */
+    @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         AbstractJavaMapperMethodGenerator methodGenerator = new CustomJavaMapperMethodGenerator();
         methodGenerator.setContext(context);
@@ -303,6 +311,7 @@ public class BasePlugin extends PluginAdapter {
      * @param introspectedTable
      * @return
      */
+    @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
         AbstractXmlElementGenerator elementGenerator = new CustomAbstractXmlElementGenerator();
         elementGenerator.setContext(context);

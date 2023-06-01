@@ -18,13 +18,15 @@ public class CustomAbstractXmlElementGenerator extends AbstractXmlElementGenerat
         // 增加baseQuery
         XmlElement sql = new XmlElement("sql");
         sql.addAttribute(new Attribute("id", "baseQuery"));
-        //在这里添加where条件
-        XmlElement selectTrimElement = new XmlElement("trim"); //设置trim标签
+        //在这里添加where条件 设置trim标签
+        XmlElement selectTrimElement = new XmlElement("trim");
         selectTrimElement.addAttribute(new Attribute("prefix", "WHERE"));
-        selectTrimElement.addAttribute(new Attribute("prefixOverrides", "AND | OR")); //添加where和and
+        //添加where和and
+        selectTrimElement.addAttribute(new Attribute("prefixOverrides", "AND | OR"));
         StringBuilder sb = new StringBuilder();
         for (IntrospectedColumn introspectedColumn : introspectedTable.getAllColumns()) {
-            XmlElement selectNotNullElement = new XmlElement("if"); //$NON-NLS-1$
+            //$NON-NLS-1$
+            XmlElement selectNotNullElement = new XmlElement("if");
             sb.setLength(0);
             sb.append("null != ");
             sb.append(introspectedColumn.getJavaProperty());
